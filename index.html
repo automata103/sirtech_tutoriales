@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirtech Academy | Tutorial: Gusano Animado Interactivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-bg"></div>
+            <div class="academy-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Sirtech Academy</h1>
+            <p>Aprende desarrollo web con tutoriales prácticos y proyectos interactivos</p>
+            
+            <div class="social-links">
+                <a href="https://instagram.com/tu_perfil" class="social-link instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    Sígueme en Instagram
+                </a>
+                <a href="https://www.youtube.com/@sirtechacademy" class="social-link youtube" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                    Suscríbete en YouTube
+                </a>
+            </div>
+        </header>
+
+        <div class="about-section">
+            <h2><i class="fas fa-info-circle"></i> Acerca de Sirtech Academy</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sirtech Academy es una plataforma educativa dedicada a enseñar desarrollo web, programación y diseño a través de tutoriales prácticos y proyectos interactivos.</p>
+                    <p>Nuestro objetivo es hacer que el aprendizaje de la tecnología sea accesible, divertido y efectivo para todos, desde principiantes hasta desarrolladores avanzados.</p>
+                    <p>En nuestros tutoriales encontrarás ejemplos de código, demostraciones en vivo y explicaciones detalladas para que puedas aplicar lo aprendido en tus propios proyectos.</p>
+                </div>
+                <div class="about-image">
+                    <div class="academy-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-play-circle"></i> Introducción</h2>
+            <p>
+                En este tutorial, aprenderás a crear un <strong>gusano animado interactivo</strong> que reacciona a las acciones del usuario en un formulario de login.
+                El efecto incluye un sistema de emociones, partículas y un diseño visual moderno.
+            </p>
+            <p>
+                El código está organizado en bloques listos para copiar y pegar en tu proyecto.
+            </p>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-code"></i> 1. Estructura HTML Básica</h2>
+            <p>
+                Comenzamos con la estructura HTML básica, incluyendo el formulario de login y el canvas para el gusano.
+            </p>
+            <div class="code-header">
+                <span>index.html</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+            </div>
+            <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Login con Gusano Animado&lt;/title&gt;
+    &lt;style&gt;
+        /* Estilos CSS irán aquí */
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="emotion-display" id="emotionDisplay"&gt;Emoción: Neutral&lt;/div&gt;
+
+    &lt;div class="login-container"&gt;
+        &lt;div class="login-box"&gt;
+            &lt;h2&gt;Iniciar Sesión&lt;/h2&gt;
+            &lt;div class="input-group"&gt;
+                &lt;label for="email"&gt;Correo electrónico&lt;/label&gt;
+                &lt;input type="email" id="email" placeholder="tu@email.com"&gt;
+            &lt;/div&gt;
+
+            &lt;div class="input-group"&gt;
+                &lt;label for="password"&gt;Contraseña&lt;/label&gt;
+                &lt;div class="password-container"&gt;
+                    &lt;input type="password" id="password" placeholder="••••••••"&gt;
+                    &lt;span class="toggle-password" id="togglePass"&gt;👁️&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;button class="login-btn" id="loginBtn"&gt;Entrar&lt;/button&gt;
+
+            &lt;div class="forgot-password"&gt;
+                &lt;a href="#"&gt;¿Olvidaste tu contraseña?&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="instructions"&gt;
+            &lt;p&gt;Interactúa con los campos de texto para ver cómo reacciona el gusano.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;canvas id="wormCanvas"&gt;&lt;/canvas&gt;
+
+    &lt;script&gt;
+        // Código JavaScript irá aquí
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-paint-brush"></i> 2. Estilos CSS para el Login y el Gusano</h2>
+            <p>
+                Añadimos los estilos CSS para el formulario y el gusano. Incluye efectos de vidrio esmerilado, sombras y animaciones.
+            </p>
+            <div class="code-header">
+                <span>style.css</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+            </div>
+            <pre><code class="language-css">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #0d0f18, #11131f, #0d0f18);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    z-index: 3;
+    position: relative;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 255, 213, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(0, 255, 213, 0.5);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    background: linear-gradient(90deg, #00ffcc, #00ccff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: rgba(0, 255, 213, 0.7);
+    box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #00ffcc;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #00ccff;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #00ffcc, #00ccff);
+    color: #003326;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 255, 213, 0.4);
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 255, 213, 0.5);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-password a {
+    color: #00ccff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #00ffcc;
+    text-decoration: underline;
+}
+
+.emotion-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.instructions {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+
+    .login-box {
+        padding: 20px;
+    }
+
+    .emotion-display {
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-cogs"></i> 3. JavaScript: Configuración Inicial</h2>
+            <p>
+                Configuramos el canvas, las variables del gusano y los eventos básicos.
+            </p>
+            <div class="code-header">
+                <span>script.js</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+            </div>
+            <pre><code class="language-javascript">
+const canvas = document.getElementById('wormCanvas');
+const ctx = canvas.getContext('2d');
+const emotionDisplay = document.getElementById('emotionDisplay');
+
+// Ajustar tamaño del canvas
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Variables del gusano
+let segments = 26;
+let segmentDistance = 20;
+let points = [];
+
+// Inicializar puntos del gusano
+for (let i = 0; i < segments; i++) {
+    points.push({ x: -200, y: canvas.height / 2 });
+}
+
+// Variables de estado
+let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+let entering = true;
+let blockingPassword = false;
+let lookingAtEmail = false;
+let wearingGlasses = false;
+let exploding = false;
+let sleeping = false;
+let sleepTimer = 0;
+let lastInteraction = Date.now();
+
+// Sistema de emociones
+let emotion = "neutral";
+let emotionIntensity = 0;
+let emotionTransition = 0;
+let targetEmotion = "neutral";
+let targetIntensity = 0;
+
+// Colores dinámicos según emoción
+let wormColor = "#00ffc4";
+let glowColor = "rgba(0,255,200,0.8)";
+let eyeColor = "#ffffff";
+let pupilColor = "#000000";
+
+// Sistema de partículas
+let particles = [];
+let dustParticles = [];
+let energyParticles = [];
+let sparkParticles = [];
+let foods = [];
+            </code></pre>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-code"></i> 4. JavaScript: Movimiento y Dibujo del Gusano</h2>
+            <p>
+                Implementamos las funciones para mover y dibujar el gusano, incluyendo la física y las emociones.
+            </p>
+            <div class="code-header">
+                <span>script.js (continuación)</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+            </div>
+            <pre><code class="language-javascript">
+// Movimiento del gusano
+function moveWorm() {
+    let head = points[0];
+
+    if (entering) {
+        head.x += 8;
+        if (head.x > canvas.width / 2 - 150) entering = false;
+    } else {
+        const targetX = mouse.x;
+        const targetY = mouse.y;
+
+        const loginRect = document.querySelector('.login-container').getBoundingClientRect();
+        const margin = 40;
+
+        const nearLogin = head.x > loginRect.left - margin &&
+                         head.x < loginRect.right + margin &&
+                         head.y > loginRect.top - margin &&
+                         head.y < loginRect.bottom + margin;
+
+        if (nearLogin) {
+            const centerX = loginRect.left + loginRect.width / 2;
+            const centerY = loginRect.top + loginRect.height / 2;
+
+            const dx = head.x - centerX;
+            const dy = head.y - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance > 0) {
+                const force = 0.5;
+                headAcceleration.x = (dx / distance) * force;
+                headAcceleration.y = (dy / distance) * force;
+                setEmotion("curious", 0.6);
+            }
+        } else {
+            if (blockingPassword) {
+                const box = document.getElementById("password").getBoundingClientRect();
+                headAcceleration.x = (box.left + box.width / 2 - head.x) * 0.001;
+                headAcceleration.y = (box.top - 25 - head.y) * 0.001;
+            } else if (lookingAtEmail) {
+                const box = document.getElementById("email").getBoundingClientRect();
+                headAcceleration.x = (box.left + box.width / 2 - head.x) * 0.0008;
+                headAcceleration.y = (box.top - 25 - head.y) * 0.0008;
+            } else {
+                headAcceleration.x = (targetX - head.x) * 0.0008;
+                headAcceleration.y = (targetY - head.y) * 0.0008;
+            }
+        }
+
+        headAcceleration.x -= headVelocity.x * 0.03;
+        headAcceleration.y -= headVelocity.y * 0.03;
+
+        headVelocity.x += headAcceleration.x;
+        headVelocity.y += headAcceleration.y;
+
+        head.x += headVelocity.x;
+        head.y += headVelocity.y;
+
+        const speed = Math.sqrt(headVelocity.x * headVelocity.x + headVelocity.y * headVelocity.y);
+        const maxSpeed = 15;
+        if (speed > maxSpeed) {
+            headVelocity.x = (headVelocity.x / speed) * maxSpeed;
+            headVelocity.y = (headVelocity.y / speed) * maxSpeed;
+        }
+    }
+
+    for (let i = 1; i < segments; i++) {
+        let prev = points[i - 1];
+        let curr = points[i];
+        let dx = prev.x - curr.x;
+        let dy = prev.y - curr.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > segmentDistance) {
+            let force = Math.min(10, (dist - segmentDistance) * 0.7);
+            curr.x += (dx / dist) * force;
+            curr.y += (dy / dist) * force;
+        }
+    }
+}
+
+// Dibujar el gusano
+function drawWorm() {
+    const head = points[0];
+
+    for (let i = segments - 1; i >= 1; i--) {
+        const size = 16 - i * 0.3;
+        const opacity = 1 - (i / segments) * 0.7;
+
+        ctx.fillStyle = `rgba(${hexToRgb(glowColor)},${opacity * 0.7})`;
+        ctx.beginPath();
+        ctx.arc(points[i].x, points[i].y, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        const gradient = ctx.createRadialGradient(
+            points[i].x, points[i].y, 0,
+            points[i].x, points[i].y, size
+        );
+        gradient.addColorStop(0, wormColor);
+        gradient.addColorStop(1, adjustColor(wormColor, -50));
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(points[i].x, points[i].y, size * 0.8, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    const headGradient = ctx.createRadialGradient(
+        head.x, head.y, 0,
+        head.x, head.y, 25
+    );
+    headGradient.addColorStop(0, wormColor);
+    headGradient.addColorStop(1, adjustColor(wormColor, -30));
+
+    ctx.fillStyle = headGradient;
+    ctx.beginPath();
+    ctx.arc(head.x, head.y, 20, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = `rgba(${hexToRgb(glowColor)},0.4)`;
+    ctx.beginPath();
+    ctx.arc(head.x, head.y, 25, 0, Math.PI * 2);
+    ctx.fill();
+
+    drawEyes(head);
+    drawMouth(head);
+}
+
+// Dibujar ojos
+function drawEyes(head) {
+    const eyeOffsetX = 10;
+    const eyeOffsetY = 6;
+    let targetX = mouse.x;
+    let targetY = mouse.y;
+
+    if (emotion === "frustrated") {
+        targetX += (Math.random() - 0.5) * 10;
+        targetY += (Math.random() - 0.5) * 10;
+    } else if (emotion === "sleepy") {
+        targetX = head.x;
+        targetY = head.y + 10;
+    }
+
+    const angle = Math.atan2(targetY - head.y, targetX - head.x);
+    const eyeMoveX = Math.cos(angle) * 4;
+    const eyeMoveY = Math.sin(angle) * 4;
+
+    if (!wearingGlasses) {
+        let eyeSize = emotion === "alert" ? 7 : 6;
+        let pupilSize = emotion === "alert" ? 2.5 : 3;
+
+        if (emotion === "sleepy") {
+            eyeSize = 5;
+            pupilSize = 2;
+        }
+
+        ctx.fillStyle = eyeColor;
+        ctx.beginPath();
+        ctx.arc(head.x - eyeOffsetX, head.y - eyeOffsetY, eyeSize, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = pupilColor;
+        ctx.beginPath();
+        ctx.arc(head.x - eyeOffsetX + eyeMoveX, head.y - eyeOffsetY + eyeMoveY, pupilSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = eyeColor;
+        ctx.beginPath();
+        ctx.arc(head.x + eyeOffsetX, head.y - eyeOffsetY, eyeSize, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = pupilColor;
+        ctx.beginPath();
+        ctx.arc(head.x + eyeOffsetX + eyeMoveX, head.y - eyeOffsetY + eyeMoveY, pupilSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (emotion === "sleepy") {
+            ctx.fillStyle = adjustColor(wormColor, -20);
+            ctx.beginPath();
+            ctx.arc(head.x - eyeOffsetX, head.y - eyeOffsetY - 2, eyeSize - 1, 0, Math.PI, false);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(head.x + eyeOffsetX, head.y - eyeOffsetY - 2, eyeSize - 1, 0, Math.PI, false);
+            ctx.fill();
+        }
+    }
+}
+
+// Dibujar boca
+function drawMouth(head) {
+    ctx.strokeStyle = pupilColor;
+    ctx.lineWidth = 2;
+
+    switch(emotion) {
+        case "happy":
+            ctx.beginPath();
+            ctx.arc(head.x, head.y + 8, 10, 0.2, Math.PI - 0.2, false);
+            ctx.stroke();
+            break;
+        case "frustrated":
+            ctx.beginPath();
+            ctx.arc(head.x, head.y + 12, 8, 0.1, Math.PI - 0.1, true);
+            ctx.stroke();
+            break;
+        case "sleepy":
+            ctx.beginPath();
+            ctx.arc(head.x, head.y + 10, 6, 0, Math.PI, false);
+            ctx.stroke();
+            break;
+        default:
+            ctx.beginPath();
+            ctx.moveTo(head.x - 8, head.y + 8);
+            ctx.lineTo(head.x + 8, head.y + 8);
+            ctx.stroke();
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-star"></i> 5. JavaScript: Sistema de Emociones y Partículas</h2>
+            <p>
+                Implementamos el sistema de emociones, partículas y alimentos para el gusano.
+            </p>
+            <div class="code-header">
+                <span>script.js (continuación)</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+            </div>
+            <pre><code class="language-javascript">
+// Sistema de emociones
+function setEmotion(newEmotion, intensity = 1.0) {
+    targetEmotion = newEmotion;
+    targetIntensity = intensity;
+    emotionTransition = 0;
+    updateEmotionDisplay();
+}
+
+function updateEmotion() {
+    if (emotion !== targetEmotion || emotionIntensity !== targetIntensity) {
+        emotionTransition += 0.05;
+        if (emotionTransition >= 1) {
+            emotion = targetEmotion;
+            emotionIntensity = targetIntensity;
+        } else {
+            emotionIntensity = emotionIntensity + (targetIntensity - emotionIntensity) * 0.1;
+        }
+        updateColorsByEmotion();
+    }
+
+    const now = Date.now();
+    if (now - lastInteraction > 10000 && !sleeping && emotion === "neutral") {
+        sleeping = true;
+        sleepTimer = 0;
+    }
+
+    if (sleeping) {
+        sleepTimer += 0.02;
+        if (sleepTimer > Math.PI * 2) sleepTimer = 0;
+    }
+}
+
+function updateColorsByEmotion() {
+    switch(emotion) {
+        case "alert":
+            wormColor = "#ff4f6a";
+            glowColor = "rgba(255,70,100,0.8)";
+            eyeColor = "#ffffff";
+            pupilColor = "#000000";
+            break;
+        case "curious":
+            wormColor = "#4c8cff";
+            glowColor = "rgba(76,140,255,0.8)";
+            eyeColor = "#ffffff";
+            pupilColor = "#000000";
+            break;
+        case "happy":
+            wormColor = "#4cff88";
+            glowColor = "rgba(76,255,136,0.8)";
+            eyeColor = "#ffffff";
+            pupilColor = "#000000";
+            break;
+        case "frustrated":
+            wormColor = "#ff6b4a";
+            glowColor = "rgba(255,107,74,0.8)";
+            eyeColor = "#ffffff";
+            pupilColor = "#000000";
+            break;
+        case "sleepy":
+            wormColor = "#8888ff";
+            glowColor = "rgba(136,136,255,0.5)";
+            eyeColor = "#aaaaaa";
+            pupilColor = "#666666";
+            break;
+        default:
+            wormColor = "#00ffc4";
+            glowColor = "rgba(0,255,200,0.8)";
+            eyeColor = "#ffffff";
+            pupilColor = "#000000";
+    }
+}
+
+function updateEmotionDisplay() {
+    emotionDisplay.textContent = `Emoción: ${targetEmotion.charAt(0).toUpperCase() + targetEmotion.slice(1)}`;
+}
+
+// Sistema de partículas
+function createExplosion(x, y, count = 12, color = wormColor) {
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x, y,
+            vx: (Math.random() * 6 - 3),
+            vy: (Math.random() * 6 - 3),
+            size: 2 + Math.random() * 4,
+            life: 500 + Math.random() * 400,
+            opacity: 1,
+            color: color,
+            born: performance.now()
+        });
+    }
+}
+
+function createDustParticles(x, y, count = 3) {
+    for (let i = 0; i < count; i++) {
+        dustParticles.push({
+            x, y,
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2,
+            size: 1 + Math.random() * 2,
+            life: 200 + Math.random() * 200,
+            opacity: 0.7,
+            born: performance.now()
+        });
+    }
+}
+
+function createEnergyParticles(x, y, count = 5) {
+    for (let i = 0; i < count; i++) {
+        energyParticles.push({
+            x, y,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: (Math.random() - 0.5) * 1.5,
+            size: 1 + Math.random() * 3,
+            life: 300 + Math.random() * 300,
+            opacity: 0.8,
+            color: wormColor,
+            born: performance.now()
+        });
+    }
+}
+
+function createSparkParticles(x, y, count = 8) {
+    for (let i = 0; i < count; i++) {
+        sparkParticles.push({
+            x, y,
+            vx: (Math.random() - 0.5) * 8,
+            vy: (Math.random() - 0.5) * 8,
+            size: 1 + Math.random() * 2,
+            life: 100 + Math.random() * 200,
+            opacity: 1,
+            color: "#ffff00",
+            born: performance.now()
+        });
+    }
+}
+
+function updateParticles() {
+    let now = performance.now();
+    particles = particles.filter(p => {
+        let age = now - p.born;
+        if (age > p.life) return false;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.05;
+        p.opacity = 1 - age / p.life;
+        return true;
+    });
+}
+
+// Inicializar alimentos
+function initFoods(count = 5) {
+    foods = [];
+    for (let i = 0; i < count; i++) {
+        spawnFood();
+    }
+}
+
+function spawnFood() {
+    const types = ['normal', 'speed', 'growth', 'energy'];
+    const type = types[Math.floor(Math.random() * types.length)];
+
+    foods.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: 8 + Math.random() * 6,
+        type: type,
+        color: getFoodColor(type),
+        wobble: Math.random() * Math.PI * 2,
+        rotation: 0
+    });
+}
+
+function getFoodColor(type) {
+    switch(type) {
+        case 'speed': return "#4c8cff";
+        case 'growth': return "#4cff88";
+        case 'energy': return "#ff4cff";
+        default: return "#ffcc00";
+    }
+}
+            </code></pre>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-sync-alt"></i> 6. JavaScript: Bucle de Animación y Eventos</h2>
+            <p>
+                Finalmente, implementamos el bucle de animación y los eventos de interacción.
+            </p>
+            <div class="code-header">
+                <span>script.js (continuación)</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copiar código</button>
+            </div>
+            <pre><code class="language-javascript">
+// Bucle de animación
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    updateEmotion();
+    updateParticles();
+    moveWorm();
+    drawWorm();
+    drawParticles();
+    requestAnimationFrame(animate);
+}
+
+// Dibujar partículas
+function drawParticles() {
+    particles.forEach(p => {
+        ctx.fillStyle = `rgba(${hexToRgb(p.color)},${p.opacity})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+    });
+}
+
+// Eventos de interacción
+window.addEventListener("mousemove", e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    lastInteraction = Date.now();
+
+    if (sleeping) {
+        sleeping = false;
+        setEmotion("neutral");
+    }
+
+    if (points.length > 0 && (Math.abs(e.movementX) > 5 || Math.abs(e.movementY) > 5)) {
+        createDustParticles(points[0].x, points[0].y, 2);
+    }
+});
+
+document.getElementById("email").addEventListener("focus", () => {
+    lookingAtEmail = true;
+    blockingPassword = false;
+    setEmotion("curious", 0.7);
+    lastInteraction = Date.now();
+    if (sleeping) sleeping = false;
+});
+
+document.getElementById("email").addEventListener("blur", () => {
+    lookingAtEmail = false;
+    if (!blockingPassword) setEmotion("neutral");
+});
+
+document.getElementById("password").addEventListener("focus", () => {
+    lookingAtEmail = false;
+    blockingPassword = true;
+    setEmotion("alert", 0.8);
+    lastInteraction = Date.now();
+    if (sleeping) sleeping = false;
+});
+
+document.getElementById("password").addEventListener("blur", () => {
+    blockingPassword = false;
+    setEmotion("neutral");
+});
+
+document.getElementById("togglePass").addEventListener("click", () => {
+    const pass = document.getElementById("password");
+    wearingGlasses = pass.type === "password";
+    pass.type = pass.type === "password" ? "text" : "password";
+    setEmotion(wearingGlasses ? "curious" : "neutral");
+    lastInteraction = Date.now();
+    if (sleeping) sleeping = false;
+    if (points.length > 0) {
+        createSparkParticles(points[0].x, points[0].y, 5);
+    }
+});
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+    let correctEmail = "admin@example.com";
+    let correctPass = "1234";
+    if (email !== correctEmail || pass !== correctPass) {
+        setEmotion("frustrated", 1.0);
+        triggerGameOver();
+    } else {
+        setEmotion("happy", 1.0);
+        if (points.length > 0) {
+            createExplosion(points[0].x, points[0].y, 20, "#4cff88");
+            createSparkParticles(points[0].x, points[0].y, 15);
+        }
+    }
+    lastInteraction = Date.now();
+    if (sleeping) sleeping = false;
+});
+
+// Funciones auxiliares
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ?
+        `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` :
+        "0, 255, 200";
+}
+
+function adjustColor(hex, amount) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (!result) return hex;
+
+    let r = parseInt(result[1], 16) + amount;
+    let g = parseInt(result[2], 16) + amount;
+    let b = parseInt(result[3], 16) + amount;
+
+    r = Math.min(255, Math.max(0, r));
+    g = Math.min(255, Math.max(0, g));
+    b = Math.min(255, Math.max(0, b));
+
+    return `#${Math.round(r).toString(16).padStart(2, '0')}${Math.round(g).toString(16).padStart(2, '0')}${Math.round(b).toString(16).padStart(2, '0')}`;
+}
+
+// Inicializar y comenzar animación
+let headVelocity = { x: 0, y: 0 };
+let headAcceleration = { x: 0, y: 0 };
+initFoods(5);
+animate();
+            </code></pre>
+        </div>
+
+        <div class="demo-container">
+            <h3>🎨 Demo en Vivo: Gusano Animado Interactivo</h3>
+            <p>Descarga el codigo completo en <strong>Gitgub:https://github.com/automata103/login_animado.git </strong> para ver la reacción de éxito:</p>
+
+          <div>
+            
+          </div>
+            <canvas id="demoWormCanvas"></canvas>
+        </div>
+
+        <div class="tutorial-section">
+            <h2><i class="fas fa-check-circle"></i> Conclusión</h2>
+            <p>
+                ¡Felicidades! Has completado el tutorial para crear un <strong>gusano animado interactivo</strong> con sistema de emociones, partículas y un diseño visual moderno.
+            </p>
+            <p>
+                Puedes personalizar los colores, la velocidad y las emociones para adaptarlo a tus proyectos.
+                Si tienes preguntas o quieres profundizar, ¡explora el código y experimenta!
+            </p>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">Sirtech Academy</div>
+                <div class="footer-links">
+                    <a href="#">Inicio</a>
+                    <a href="#">Tutoriales</a>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Contacto</a>
+                </div>
+            </div>
+            <p>© 2025 Sirtech Academy | Tutorial creado por Shadow Hunter</p>
+        </footer>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
